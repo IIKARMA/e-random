@@ -1,6 +1,20 @@
-import { VStack, Text, Input } from "@chakra-ui/react";
+import {
+	VStack,
+	NumberInput,
+	Text,
+	NumberInputField,
+	Input,
+} from "@chakra-ui/react";
 import { ChangeEvent } from "react";
-
+export type ONLY_FOR_FORMAT =
+	| "text"
+	| "search"
+	| "none"
+	| "tel"
+	| "url"
+	| "email"
+	| "numeric"
+	| "decimal";
 interface TextFieldProps {
 	text: string | readonly string[] | number | undefined;
 	label: string;

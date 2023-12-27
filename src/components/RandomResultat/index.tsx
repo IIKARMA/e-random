@@ -4,7 +4,10 @@ interface RandomNuberProps {
 	listNumberRandom: number[];
 	startRandom: boolean;
 }
-const RandomNumber = ({ startRandom, listNumberRandom }: RandomNuberProps) => {
+const RandomResultat = ({
+	startRandom,
+	listNumberRandom,
+}: RandomNuberProps) => {
 	return (
 		<Box
 			justifyContent='center'
@@ -35,4 +38,4 @@ const RandomNumber = ({ startRandom, listNumberRandom }: RandomNuberProps) => {
 		</Box>
 	);
 };
-export default memo(RandomNumber);
+export default memo(RandomResultat);

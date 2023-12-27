@@ -9,13 +9,13 @@ interface HistoryResultatProps {
 const HistoryResultat = ({ history, handlerClear }: HistoryResultatProps) => {
 	const { t } = useTranslation();
 	const numbers: number[] =
-		history.length > 4 ? history.reverse().slice(4, history.length) : history;
+		history.length > 4 ? [...history].reverse() : [...history].reverse();
 	return (
 		<HStack alignItems='baseline' maxW={[280, 380]}>
 			<Text>
 				{t("history")}
-				<b>{numbers.reverse().slice()[0]}</b>,{" "}
-				{numbers.reverse().slice().join(", ").padStart(1)}
+				<b>{[...numbers].reverse().at(-1)}</b>,{" "}
+				{[...numbers].slice().join(", ").padStart(1)}
 			</Text>
 			<IconButton
 				onClick={handlerClear}

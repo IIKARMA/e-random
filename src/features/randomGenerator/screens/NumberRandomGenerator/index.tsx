@@ -5,7 +5,7 @@ import { ChangeEvent, useCallback, useState } from "react";
 import { RandomNumberGeneratorFormState } from "src/features/randomGenerator/types";
 import { useTranslation } from "react-i18next";
 import { useValidation } from "src/hooks/useValidation";
-import RandomNumber from "src/components/RandomNumber";
+import RandomResultat from "src/components/RandomResultat";
 import HistoryResultat from "src/components/HistoryResultat";
 // import { getInfoUser } from "../../../../api/userApi";
 //178.158.193.2
@@ -80,9 +80,9 @@ const RandomGeneratorNumber = () => {
 	const renderRandom = useCallback(
 		() => (
 			<VStack>
-				<RandomNumber
+				<RandomResultat
 					startRandom={isValid && checkValidation}
-					listNumberRandom={randomList.reverse()}
+					listNumberRandom={randomList}
 				/>
 				<HistoryResultat
 					handlerClear={handlerClearResult}

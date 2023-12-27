@@ -1,23 +1,21 @@
-import { Box } from "@chakra-ui/layout";
-import {
-	LinkBox,
-	LinkOverlay,
-	Button,
-	VStack,
-	HStack,
-	Image,
-} from "@chakra-ui/react";
+import { LinkBox, Button, VStack, HStack, Image } from "@chakra-ui/react";
 import { ChangeEvent, FC } from "react";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
+
 interface RadioButtomProps {
 	onChange?: (event: ChangeEvent) => void;
 	isChecked?: boolean;
 	children?: any;
+	img?: string;
+	path?: string;
 }
 const RadioButton: FC<RadioButtomProps> = ({
 	onChange,
 	isChecked,
 	children,
+	img,
+	path,
 }) => {
 	const { t } = useTranslation();
 	return (
@@ -42,7 +40,7 @@ const RadioButton: FC<RadioButtomProps> = ({
 			onClick={() => {
 				onChange && onChange(children);
 			}}>
-			<LinkOverlay href='/number'>
+			<Link to={path ? path : ""}>
 				<HStack spacing={15}>
 					<VStack spacing='70px' alignItems='flex-start'>
 						<h1>{children}</h1>
@@ -50,9 +48,9 @@ const RadioButton: FC<RadioButtomProps> = ({
 							{t("go")}
 						</Button>
 					</VStack>
-					<Image src={require("src/assets/list.png")} w='120px' />
+					<Image src={require("src/assets/" + img)} w='120px' />
 				</HStack>
-			</LinkOverlay>
+			</Link>
 		</LinkBox>
 	);
 };

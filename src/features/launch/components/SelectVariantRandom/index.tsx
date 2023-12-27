@@ -5,7 +5,10 @@ import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 const SelectVariantRandom = () => {
 	const { t } = useTranslation();
-	const variants = [RandomVariants.List, RandomVariants.Number];
+	const variants = [
+		{ type: RandomVariants.Number, img: "numbers.png", path: "number" },
+		{ type: RandomVariants.List, img: "list.png", path: "list" },
+	];
 	const [selectedVariant, setSelectedVariant] = useState<string>(
 		RandomVariants.Number,
 	);
@@ -36,8 +39,12 @@ const SelectVariantRandom = () => {
 					marginY='5%'>
 					{variants.map((variable) => {
 						return (
-							<RadioButton key={variable.toString()} onChange={handlerSelect}>
-								{t(variable)}
+							<RadioButton
+								path={variable.path}
+								img={variable.img}
+								key={variable.toString()}
+								onChange={handlerSelect}>
+								{t(variable.type)}
 							</RadioButton>
 						);
 					})}
