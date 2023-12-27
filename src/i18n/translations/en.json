@@ -1,0 +1,21 @@
+{
+    "ramdozier": "Random generators",
+    "numberRandomizer": "Random number generator",
+    "listRandomizer": "Random name generator",
+    "generate": "Generate",
+    "navigation": {
+        "home": "Home",
+        "reviews": "Reviews"
+    },
+    "select": "Select",
+    "go": "Generate",
+    "selectRandomizer": "Select the generation method",
+    "min": "Minimal number",
+    "max": "Maximum number",
+    "uniqueNumber": "Unique results (no duplicates)",
+    "errorMessage": {
+        "maxValueMustBeGreater": "The maximum value must be greater than the minimum",
+        "inputMaxValue": "Enter the maximum value"
+    },
+    "history": "The latest generations:"
+}
