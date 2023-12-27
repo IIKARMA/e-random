@@ -3,6 +3,7 @@
     "numberRandomizer": "Рандомайзер числовий",
     "listRandomizer": "Рандомайзер зі списку",
     "generate": "Генерувати",
+    "generateMore":"Згенерувати ще",
     "navigation": {
         "home": "Головна",
         "reviews": "Відгуки"

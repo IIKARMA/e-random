@@ -3,6 +3,7 @@
     "numberRandomizer": "Random number generator",
     "listRandomizer": "Random name generator",
     "generate": "Generate",
+    "generateMore":"Generate more",
     "navigation": {
         "home": "Home",
         "reviews": "Reviews"
