@@ -1,5 +1,11 @@
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@chakra-ui/react";
+import {
+	Breadcrumb,
+	Text,
+	BreadcrumbItem,
+	BreadcrumbLink,
+} from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
 const Header = () => {
 	const { t } = useTranslation("translation");
@@ -9,16 +15,21 @@ const Header = () => {
 			alignItems='center'
 			flexDirection='row'
 			display='flex'
+			width='100%'
 			paddingRight='20px'
 			justifyContent='flex-end'
-			backgroundBlendMode='100'
+			backgroundBlendMode='32'
 			h='80px'>
 			<BreadcrumbItem>
-				<BreadcrumbLink href='/'>{t("navigation.home")}</BreadcrumbLink>
+				<Link to='/number'>
+					<Text>{t("navigation.home")}</Text>
+				</Link>
 			</BreadcrumbItem>
 
 			<BreadcrumbItem>
-				<BreadcrumbLink href='/app'>{t("navigation.reviews")}</BreadcrumbLink>
+				<Link to='/app'>
+					<Text>{t("navigation.reviews")}</Text>
+				</Link>
 			</BreadcrumbItem>
 		</Breadcrumb>
 	);

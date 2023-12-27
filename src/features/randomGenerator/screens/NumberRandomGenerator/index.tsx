@@ -5,7 +5,7 @@ import { ChangeEvent, useCallback, useState } from "react";
 import { RandomNumberGeneratorFormState } from "src/features/randomGenerator/types";
 import { useTranslation } from "react-i18next";
 import { useValidation } from "src/hooks/useValidation";
-import RandomNumber from "src/components/RandomNumber";
+import RandomResultat from "src/components/RandomResultat";
 import HistoryResultat from "src/components/HistoryResultat";
 // import { getInfoUser } from "../../../../api/userApi";
 //178.158.193.2
@@ -80,9 +80,9 @@ const RandomGeneratorNumber = () => {
 	const renderRandom = useCallback(
 		() => (
 			<VStack>
-				<RandomNumber
+				<RandomResultat
 					startRandom={isValid && checkValidation}
-					listNumberRandom={randomList.reverse()}
+					listNumberRandom={randomList}
 				/>
 				<HistoryResultat
 					handlerClear={handlerClearResult}
@@ -94,27 +94,30 @@ const RandomGeneratorNumber = () => {
 	);
 
 	return (
-		<>
-			<Heading textAlign='center' pb='10' color='#fefef09e'>
+		<Box>
+			<Heading
+				pt={["0", "20"]}
+				mt='0'
+				fontSize={["24px", "36px"]}
+				textAlign='center'
+				pb='10'
+				color='#fefef09e'>
 				{t("numberRandomizer")}
 			</Heading>
 			<Center>
 				<HStack
 					wrap='wrap'
-					width={{ base: "100%", sm: "50%", md: "25%" }}
-					spacing='10'
+					w={["90%", "50%", "50%"]}
+					spacing={10}
 					alignSelf='center'
-					flex={3}
-					w='85%'
 					justify='center'
-					py='10'
-					mx='10'
-					px='20'
-					pt='20'
+					display='flex'
+					pt={["10", "20"]}
+					p='2rem'
 					justifyContent='space-around'
-					borderRadius='1.5rem'
+					borderRadius='1.2rem'
 					bg='#cdb4d09b'>
-					<VStack alignSelf='flex-start' spacing='3.5rem'>
+					<VStack alignSelf='flex-start' spacing={[5, 8]}>
 						{randomNumberGeneratorFields.map((field) => (
 							<TextField
 								inputType={field.inputType}
@@ -127,8 +130,10 @@ const RandomGeneratorNumber = () => {
 						))}
 
 						<Box
+							width={["90%", "100%"]}
+							height={["50px", "60px"]}
+							fontSize={["16px", "24px"]}
 							onClick={hanlderSubmit}
-							p={4}
 							color='white'
 							fontWeight='bold'
 							borderRadius='md'
@@ -139,11 +144,7 @@ const RandomGeneratorNumber = () => {
 								textColor: "#gray.300",
 							}}
 							style={{
-								fontSize: 28,
 								fontWeight: "600",
-								alignSelf: "flex-start",
-								width: "100%",
-								height: "80px",
 							}}>
 							{t("generate")}
 						</Box>
@@ -151,7 +152,7 @@ const RandomGeneratorNumber = () => {
 					{renderRandom()}
 				</HStack>
 			</Center>
-		</>
+		</Box>
 	);
 };
 export default RandomGeneratorNumber;

@@ -4,16 +4,19 @@ interface RandomNuberProps {
 	listNumberRandom: number[];
 	startRandom: boolean;
 }
-const RandomNumber = ({ startRandom, listNumberRandom }: RandomNuberProps) => {
+const RandomResultat = ({
+	startRandom,
+	listNumberRandom,
+}: RandomNuberProps) => {
 	return (
 		<Box
 			justifyContent='center'
 			alignItems='center'
 			bgGradient='linear(to-r, purple.300, blue.300)'
-			borderRadius='1.5rem'
-			w={[280, 380]}
+			borderRadius='1.2rem'
+			w={[300, 280]}
 			display='flex'
-			height={[280, 380]}>
+			height={[300, 280]}>
 			{startRandom ? (
 				<Spinner
 					thickness='4px'
@@ -35,4 +38,4 @@ const RandomNumber = ({ startRandom, listNumberRandom }: RandomNuberProps) => {
 		</Box>
 	);
 };
-export default memo(RandomNumber);
+export default memo(RandomResultat);

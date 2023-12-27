@@ -1,6 +1,20 @@
-import { VStack, Text, Input } from "@chakra-ui/react";
+import {
+	VStack,
+	NumberInput,
+	Text,
+	NumberInputField,
+	Input,
+} from "@chakra-ui/react";
 import { ChangeEvent } from "react";
-
+export type ONLY_FOR_FORMAT =
+	| "text"
+	| "search"
+	| "none"
+	| "tel"
+	| "url"
+	| "email"
+	| "numeric"
+	| "decimal";
 interface TextFieldProps {
 	text: string | readonly string[] | number | undefined;
 	label: string;
@@ -19,18 +33,20 @@ const TextField = ({
 	onChange,
 }: TextFieldProps) => {
 	return (
-		<VStack alignSelf='flex-start'>
+		<VStack w={[320, 280]} alignSelf='flex-start'>
 			<Text
+				width={["90%", "100%"]}
+				fontSize={["18px", "24px"]}
 				style={{
-					textAlign: "left",
+					textAlign: "center",
 					fontWeight: "bold",
 					color: "#fff",
-					fontSize: 32,
-					width: "100%",
 				}}>
 				{label}
 			</Text>
 			<Input
+				fontSize={["18px", "24px"]}
+				width={["90%", "100%"]}
 				_focus={{
 					background: "white",
 					borderColor: "blue.400",
@@ -38,7 +54,6 @@ const TextField = ({
 				color='gray.600'
 				fontWeight='600'
 				textAlign='center'
-				fontSize='32'
 				lineHeight='48'
 				type={inputType}
 				value={text}

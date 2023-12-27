@@ -6,9 +6,12 @@ import { Route, Routes } from "react-router-dom";
 import RadioButton from "src/components/RadioButton";
 import i18n from "src/i18n/index";
 import { I18nextProvider } from "react-i18next";
-import RandomGeneratorNumber from "src/features/randomGenerator/numberRandom/NumberRandomGenerator";
+import RandomGeneratorNumber from "src/features/randomGenerator/screens/NumberRandomGenerator";
+import ListRandomGenerator from "src/features/randomGenerator/screens/ListRandomGenerator";
 import Header from "src/components/Header";
 import Screen from "src/components/Screen";
+
+
 function App() {
 	useEffect(() => {
 		i18n.init();
@@ -23,6 +26,7 @@ function App() {
 						<Route path='/' element={<LaunchScreen />} />
 						<Route path='app' element={<RadioButton />} />
 						<Route path='number' element={<RandomGeneratorNumber />} />
+						<Route path='list' element={<ListRandomGenerator />} />
 					</Routes>
 				</Screen>
 			</ChakraProvider>

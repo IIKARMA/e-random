@@ -1,3 +1,2 @@
-              - name: React Deploy - Github Pages
-                uses: fcodelabs/react-deploy-github-pages-action@v1.0.0
-            
+- name: React Deploy - Github Pages
+  uses: fcodelabs/react-deploy-github-pages-action@v1.0.0
