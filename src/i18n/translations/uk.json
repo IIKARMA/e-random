@@ -3,8 +3,8 @@
     "numberRandomizer": "Рандомайзер числовий",
     "listRandomizer": "Рандомайзер зі списку",
     "generate": "Генерувати",
-    "generateMore":"Згенерувати ще",
-    "uploadFile":"Додати файл",
+    "generateMore": "Згенерувати ще",
+    "uploadFile": "Додати файл",
     "navigation": {
         "home": "Головна",
         "reviews": "Відгуки"
@@ -19,5 +19,6 @@
         "maxValueMustBeGreater": "Максимальне значення повинно бути більше за мінімальне",
         "inputMaxValue": "Введіть максимальне значення"
     },
-    "history": "Останні генерації: "
+    "history": "Останні генерації: ",
+    "placeholderListRandom": "Додайте по одному учаснику в кожному рядку..."
 }
