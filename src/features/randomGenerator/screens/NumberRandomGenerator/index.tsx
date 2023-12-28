@@ -80,7 +80,7 @@ const RandomGeneratorNumber = () => {
       rangeGeneration.maxNumber
     );
     isValid && setRandomList([...randomList, t]);
-    onOpen();
+    isValid &&  onOpen();
     setTimeout(() => {
       setCheckValidation(false);
     }, 500);
@@ -185,7 +185,7 @@ const RandomGeneratorNumber = () => {
           ) : (
             <RandomResultatModal
               onClose={onClose}
-              isOpen={isOpen}
+              isOpen={ isOpen}
               listNumberRandom={randomList}
               handlerRandom={hanlderSubmit}
             />
