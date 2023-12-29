@@ -27,6 +27,8 @@ import Description from "src/components/Description";
 
 const ListRandomGenerator = () => {
 	const styles = useStyleConfig("Box", { variant: "button" });
+	const hstackStyles = useStyleConfig("HStack", { variant: "conteiner" });
+
 	const [hiddenResultaBox, setHiddenResultaBox] = useBoolean();
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const toast = useToast();
@@ -96,18 +98,8 @@ const ListRandomGenerator = () => {
 			</Heading>
 			<Center>
 				<HStack
-					boxShadow='xl'
-					wrap='wrap'
-					w={["90%", "50%", "50%"]}
-					spacing={10}
 					alignItems={!hiddenResultaBox ? "baseline" : ""}
-					alignSelf='center'
-					display='flex'
-					pt={["10", "20"]}
-					p='2rem'
-					justifyContent='space-around'
-					borderRadius='1.2rem'
-					bg='#cdb4d09b'>
+					__css={hstackStyles}>
 					<VStack alignSelf='flex-start' spacing={hiddenResultaBox ? 3 : 5}>
 						<VStack
 							spacing={hiddenResultaBox ? 3 : 5}
@@ -159,20 +151,7 @@ const ListRandomGenerator = () => {
 							type='File'
 						/>
 						<></>
-						<Box
-							alignItems='center'
-							mb={hiddenResultaBox ? 0 : 5}
-							__css={styles}
-							as='button'
-							_hover={{
-								bgGradient: "linear(to-r, blue.300, purple.300)",
-								textColor: "#gray.300",
-							}}
-							style={{
-								justifyContent: "center",
-								alignItems: "center",
-								fontWeight: "600",
-							}}>
+						<Box mb={hiddenResultaBox ? 0 : 5} __css={styles} as='button'>
 							{t("generate")}
 						</Box>
 					</VStack>

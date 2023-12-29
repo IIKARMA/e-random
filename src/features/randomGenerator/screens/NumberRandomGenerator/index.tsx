@@ -27,8 +27,8 @@ export enum RandomNumberGeneratorNames {
 	MAX_NUMBER = "maxNumber",
 }
 const RandomGeneratorNumber = () => {
-	const styles = useStyleConfig("Box", { variant: "button" });
-
+	const boxStyles = useStyleConfig("Box", { variant: "button" });
+	const hstackStyles = useStyleConfig("HStack", { variant: "conteiner" });
 	const boxRef = useRef(null);
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const { screenWidth } = useResizeScreen();
@@ -128,18 +128,8 @@ const RandomGeneratorNumber = () => {
 			</Heading>
 			<Center>
 				<HStack
-					boxShadow='xl'
-					wrap='wrap'
-					w={["90%", "50%", "50%"]}
-					spacing={10}
 					alignItems={!hiddenResultaBox ? "baseline" : ""}
-					alignSelf='center'
-					display='flex'
-					pt={["10", "20"]}
-					p='2rem'
-					justifyContent='space-around'
-					borderRadius='1.2rem'
-					bg='#cdb4d09b'>
+					__css={hstackStyles}>
 					<VStack alignSelf='flex-start' spacing={[5, 8]}>
 						{randomNumberGeneratorFields.map((field) => (
 							<TextField
@@ -152,16 +142,7 @@ const RandomGeneratorNumber = () => {
 							/>
 						))}
 
-						<Box
-							__css={styles}
-							as='button'
-							_hover={{
-								bgGradient: "linear(to-r, blue.300, purple.300)",
-								textColor: "#gray.300",
-							}}
-							style={{
-								fontWeight: "600",
-							}}>
+						<Box __css={boxStyles} as='button'>
 							{t("generate")}
 						</Box>
 					</VStack>

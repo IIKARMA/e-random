@@ -1,10 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit'
- import {variantSlice} from 'src/features/launch/slice'
 
 export const store = configureStore({
   reducer: {
-    variants: variantSlice.reducer,
-    
+
   },
 })
 

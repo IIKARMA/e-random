@@ -1,5 +1,4 @@
 import { defineStyleConfig } from "@chakra-ui/react";
-import { hover } from "@testing-library/user-event/dist/hover";
 
 export const Box = defineStyleConfig({
 
@@ -13,6 +12,12 @@ export const Box = defineStyleConfig({
             height: ["45px", "60px"],
             width: ["90%", "100%"],
             textAlign: 'center',
-        }
+            _hover: {
+                bgGradient: "linear(to-r, blue.300, purple.300)",
+                textColor: "#gray.300",
+            },
+        },
+
+
     }
 })
