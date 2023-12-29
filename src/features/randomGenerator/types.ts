@@ -23,3 +23,7 @@ export interface RandomNumberGeneratorFormState {
     errorMessages: string[]
     inputType: string
 }
+export enum TypeResultat {
+    STRING = "string",
+    NUBER = "number",
+}

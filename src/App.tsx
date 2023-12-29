@@ -10,8 +10,7 @@ import RandomGeneratorNumber from "src/features/randomGenerator/screens/NumberRa
 import ListRandomGenerator from "src/features/randomGenerator/screens/ListRandomGenerator";
 import Header from "src/components/Header";
 import Screen from "src/components/Screen";
-
-
+import { theme } from "src/theme";
 function App() {
 	useEffect(() => {
 		i18n.init();
@@ -19,7 +18,9 @@ function App() {
 
 	return (
 		<I18nextProvider i18n={i18n} defaultNS={"translation"}>
-			<ChakraProvider toastOptions={{ defaultOptions: { position: "bottom" } }}>
+			<ChakraProvider
+				theme={theme}
+				toastOptions={{ defaultOptions: { position: "bottom" } }}>
 				<Header />
 				<Screen>
 					<Routes>

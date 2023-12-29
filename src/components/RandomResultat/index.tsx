@@ -1,18 +1,16 @@
 import { Box, Spinner, Text } from "@chakra-ui/react";
 import { memo } from "react";
-export enum TypeResultat {
-	STRING = "string",
-	NUBER = "number",
-}
+import { TypeResultat } from "src/features/randomGenerator/types";
+
 interface RandomNuberProps {
 	listNumberRandom: (number | string)[];
 	startRandom: boolean;
-	type?: TypeResultat;
+	typeResultat?: TypeResultat;
 }
 const RandomResultat = ({
 	startRandom,
 	listNumberRandom,
-	type,
+	typeResultat,
 }: RandomNuberProps) => {
 	return (
 		<Box
@@ -20,9 +18,9 @@ const RandomResultat = ({
 			alignItems='center'
 			bgGradient='linear(to-r, purple.300, blue.300)'
 			borderRadius='1.2rem'
-			w={[300, 280]}
+			w={[280, 310, 500]}
 			display='flex'
-			height={[300, 280]}>
+			height={[280, 310, 330]}>
 			{startRandom ? (
 				<Spinner
 					thickness='4px'
@@ -33,7 +31,7 @@ const RandomResultat = ({
 				/>
 			) : (
 				<Text
-					fontSize={type === TypeResultat.STRING ? [18, 24] : [60, 100]}
+					fontSize={typeResultat === TypeResultat.STRING ? [18, 24] : [60, 100]}
 					textAlign='center'
 					color='white'
 					fontWeight='bold'

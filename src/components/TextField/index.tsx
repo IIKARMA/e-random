@@ -45,7 +45,8 @@ const TextField = ({
 				{label}
 			</Text>
 			<Input
-				fontSize={["18px", "24px"]}
+				height={["40px", "60px"]}
+				fontSize={["18px", "32px"]}
 				width={["90%", "100%"]}
 				_focus={{
 					background: "white",

@@ -6,6 +6,7 @@ import {
 	Heading,
 	VStack,
 	useBoolean,
+	useStyleConfig,
 } from "@chakra-ui/react";
 import TextField from "src/components/TextField";
 import { ChangeEvent, useCallback, useRef, useState, useEffect } from "react";
@@ -16,7 +17,8 @@ import RandomResultat from "src/components/RandomResultat";
 import HistoryResultat from "src/components/HistoryResultat";
 import RandomResultatModal from "src/components/RandomResultatModal";
 import { useResizeScreen } from "src/hooks/useResizeScreen";
-import { onRandomNumber } from "src/unilits/onRandomNumber";
+import { onRandomNumber } from "src/utilities/onRandomNumber";
+import Description from "src/components/Description";
 
 // import { getInfoUser } from "../../../../api/userApi";
 //178.158.193.2
@@ -25,6 +27,8 @@ export enum RandomNumberGeneratorNames {
 	MAX_NUMBER = "maxNumber",
 }
 const RandomGeneratorNumber = () => {
+	const styles = useStyleConfig("Box", { variant: "button" });
+
 	const boxRef = useRef(null);
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const { screenWidth } = useResizeScreen();
@@ -124,11 +128,12 @@ const RandomGeneratorNumber = () => {
 			</Heading>
 			<Center>
 				<HStack
+					boxShadow='xl'
 					wrap='wrap'
 					w={["90%", "50%", "50%"]}
 					spacing={10}
+					alignItems={!hiddenResultaBox ? "baseline" : ""}
 					alignSelf='center'
-					justify='center'
 					display='flex'
 					pt={["10", "20"]}
 					p='2rem'
@@ -148,14 +153,7 @@ const RandomGeneratorNumber = () => {
 						))}
 
 						<Box
-							width={["90%", "100%"]}
-							height={["50px", "60px"]}
-							fontSize={["16px", "24px"]}
-							onClick={hanlderSubmit}
-							color='white'
-							fontWeight='bold'
-							borderRadius='md'
-							bgGradient='linear(to-r, purple.500, blue.500)'
+							__css={styles}
 							as='button'
 							_hover={{
 								bgGradient: "linear(to-r, blue.300, purple.300)",
@@ -179,6 +177,12 @@ const RandomGeneratorNumber = () => {
 					)}
 				</HStack>
 			</Center>
+			<Description
+				description={[
+					String(t("descriptionNumberRandom.header")),
+					String(t("descriptionNumberRandom.body")),
+				]}
+			/>
 		</Box>
 	);
 };

@@ -5,12 +5,12 @@ const Screen = ({ children }: any) => {
 		<Box
 			overflowY='hidden'
 			overflow='hidden'
-			bgGradient='linear(blue.200 0%, blue.100 25%, purple.100 50%)'
+			bgGradient='linear(purple.100 0%, blue.100 25%, blue.200 50%)'
 			style={{
+				height: "100vh",
 				minWidth: 375,
 				justifyContent: "center",
 				paddingTop: 24,
-				height: 1400,
 			}}>
 			{children}
 		</Box>
