@@ -5,6 +5,7 @@ export const HStack = defineStyleConfig({
             boxShadow: 'xl',
             w: ["90%", "50%", "50%"],
             spacing: 10,
+            borderRadius: '1.2rem',
             alignSelf: 'center',
             display: 'flex',
             pt: ['10', '20'],

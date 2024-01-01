@@ -19,8 +19,9 @@ export const Box = defineStyleConfig({
         },
         buttonCard: {
             color: 'white',
-            fontWeight: 'bold',
-            borderRadius: 'md', alignSelf: 'center',
+            fontWeight: 'bold', zIndex: 3233,
+            borderRadius: 'md',
+            alignSelf: 'center',
             bgGradient: 'linear(to-r, purple.600, blue.300)',
             fontSize: ["16px", "18px"],
             width: [320, 350, 340],

@@ -35,6 +35,7 @@ const HeaderMenu = ({ children }: HeaderMenuProps) => {
 	return (
 		<>
 			<IconButton
+				background='#fefefef0e'
 				aria-label='Hamburger menu'
 				onClick={handleClick}
 				icon={<HamburgerIcon />}

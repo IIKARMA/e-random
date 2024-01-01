@@ -37,9 +37,11 @@ const Header = () => {
 			display='flex'
 			width='100%'
 			bg='#4299e019'
+			minWidth='100vw'
 			paddingRight='20px'
 			backgroundBlendMode='32'
-			h='72px'>
+			h='72px'
+			mb={screenWidth > 400 ? "5rem" : "2rem"}>
 			<HStack
 				spacing={5}
 				justifyContent='space-between'

@@ -149,7 +149,7 @@ const RandomGeneratorNumber = () => {
 	);
 
 	useEffect(() => {
-		if (screenWidth < 380) setHiddenResultaBox.on();
+		if (screenWidth < 435) setHiddenResultaBox.on();
 		else setHiddenResultaBox.off();
 	}, [screenWidth, setHiddenResultaBox]);
 
