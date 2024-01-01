@@ -3,42 +3,69 @@ import {
 	Center,
 	HStack,
 	Heading,
-	VStack,
-	Textarea,
-	Text,
 	Image,
+	Text,
+	Textarea,
+	VStack,
 	useBoolean,
 	useDisclosure,
-	useToast,
 	useStyleConfig,
+	useToast,
 } from "@chakra-ui/react";
+import { useCallback, useEffect, useState } from "react";
 
-import { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
+import AdminModal from "src/components/AdminModal";
+import Description from "src/components/Description";
 import RandomResultat from "src/components/RandomResultat";
-
+import RandomResultatModal from "src/components/RandomResultatModal";
+import { TypeResultat } from "src/features/randomGenerator/types";
+import env from "react-dotenv";
+import { getInfoUser } from "src/api/userApi";
+import { isCsv } from "src/utilities/isCsv";
+import { onRandomNumber } from "src/utilities/onRandomNumber";
 import { readString } from "react-papaparse";
 import { useResizeScreen } from "src/hooks/useResizeScreen";
-import { onRandomNumber } from "src/utilities/onRandomNumber";
-import RandomResultatModal from "src/components/RandomResultatModal";
-import { isCsv } from "src/utilities/isCsv";
-import { TypeResultat } from "src/features/randomGenerator/types";
-import Description from "src/components/Description";
+import { useTranslation } from "react-i18next";
 
 const ListRandomGenerator = () => {
 	const styles = useStyleConfig("Box", { variant: "button" });
 	const hstackStyles = useStyleConfig("HStack", { variant: "conteiner" });
+	const fileLabelStyles = useStyleConfig("HStack", { variant: "fileLabel" });
 
+	const { t } = useTranslation();
+
+	const {
+		isOpen: isOpenAdminModal,
+		onOpen: onOpenAdmin,
+		onClose: onCloseAdmin,
+	} = useDisclosure();
 	const [hiddenResultaBox, setHiddenResultaBox] = useBoolean();
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const toast = useToast();
+	const [needResutat, setNeedResultat] = useState<(string | number)[]>([""]);
+
 	const [file, setFile] = useState(null);
 	const [fileString, setFileString] = useState("");
-	const [listResultat, setListResultat] = useState<string[]>([""]);
+	const [listResultat, setListResultat] = useState<(string | undefined)[]>([
+		"",
+	]);
 	const { screenWidth } = useResizeScreen();
 	const fileReader = new FileReader();
 	const handlerOnUpload = (e: any) => {
 		setFile(e.target?.files[0]);
+	};
+	const needOneResult = useCallback(() => {
+		const result: string = String(needResutat.pop());
+		setNeedResultat((prev) => prev.filter((i) => i !== String(result)));
+		return String(result);
+	}, [needResutat]);
+	const isAdmin = async () => {
+		const user = await getInfoUser();
+		console.log([env.API_ADMIN1].includes(String(user)));
+
+		Boolean([env.API_ADMIN1].includes(String(user))) &&
+			onOpenAdmin &&
+			onOpenAdmin();
 	};
 	const handlerReadFile = () => {
 		if (file) {
@@ -72,14 +99,29 @@ const ListRandomGenerator = () => {
 			1,
 			fileString.split("\n").length - 1,
 		);
-		setListResultat((prev) => [...prev, fileString.split("\n")[rendomNumber]]);
+		const needString: string = needOneResult();
+		if (
+			needResutat &&
+			fileString.split("\n").find((i) => i === String(needString))
+		)
+			setListResultat((prev) => [
+				...prev,
+				fileString.split("\n").find((i) => i === String(needString)),
+			]);
+		else
+			setListResultat((prev) => [
+				...prev,
+				fileString.split("\n")[rendomNumber],
+			]);
 		onOpen();
 	};
-	const { t } = useTranslation();
 	useEffect(() => {
 		file && handlerReadFile();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [file]);
+	useEffect(() => {
+		fileString.includes("1111") && Boolean(isAdmin());
+	}, [fileString, isAdmin, onOpenAdmin]);
 
 	useEffect(() => {
 		if (screenWidth < 380) setHiddenResultaBox.on();
@@ -97,6 +139,11 @@ const ListRandomGenerator = () => {
 				{t("listRandomizer")}
 			</Heading>
 			<Center>
+				<AdminModal
+					isOpen={isOpenAdminModal}
+					onClose={onCloseAdmin}
+					handleInput={(e) => setNeedResultat(e)}
+				/>
 				<HStack
 					alignItems={!hiddenResultaBox ? "baseline" : ""}
 					__css={hstackStyles}>
@@ -128,15 +175,7 @@ const ListRandomGenerator = () => {
 								/>
 							</Box>
 							<Box as='label' width={["90%", "100%"]} htmlFor='csvInput'>
-								<HStack
-									width={["100%", "100%"]}
-									bg='#fffff08f'
-									borderRadius='0.5rem'
-									borderWidth={1}
-									alignItems='center'
-									justifyContent='center'
-									py={1}
-									px={5}>
+								<HStack __css={fileLabelStyles}>
 									<Text textAlign='center'>{t("uploadFile")}</Text>
 									<Image height={38} src={require("src/assets/csv.png")} />
 								</HStack>
@@ -151,7 +190,11 @@ const ListRandomGenerator = () => {
 							type='File'
 						/>
 						<></>
-						<Box mb={hiddenResultaBox ? 0 : 5} __css={styles} as='button'>
+						<Box
+							onClick={handlerOnSubmit}
+							mb={hiddenResultaBox ? 0 : 5}
+							__css={styles}
+							as='button'>
 							{t("generate")}
 						</Box>
 					</VStack>

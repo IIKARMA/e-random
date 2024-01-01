@@ -1,9 +1,12 @@
-import { useToast } from "@chakra-ui/react"
 import { useEffect, useState, } from "react"
+
+import { useToast } from "@chakra-ui/react"
 import { useTranslation } from "react-i18next";
 
+interface useValidationProps { check: boolean, minNumber: number, maxNumber: number }
+
 export const useValidation = ({ check, minNumber,
-    maxNumber }: { check: boolean, minNumber: number, maxNumber: number }) => {
+    maxNumber }: useValidationProps) => {
     const toast = useToast()
     const { t } = useTranslation()
     const [isValid, setIsValid] = useState<boolean>(false)

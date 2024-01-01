@@ -1,17 +1,18 @@
 import { Box, Spinner, Text } from "@chakra-ui/react";
-import { memo } from "react";
+import { FC, memo } from "react";
+
 import { TypeResultat } from "src/features/randomGenerator/types";
 
 interface RandomNuberProps {
-	listNumberRandom: (number | string)[];
+	listNumberRandom: (number | string | undefined)[];
 	startRandom: boolean;
 	typeResultat?: TypeResultat;
 }
-const RandomResultat = ({
+const RandomResultat: FC<RandomNuberProps> = ({
 	startRandom,
 	listNumberRandom,
 	typeResultat,
-}: RandomNuberProps) => {
+}) => {
 	return (
 		<Box
 			justifyContent='center'

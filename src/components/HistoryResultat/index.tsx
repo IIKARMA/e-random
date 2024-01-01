@@ -1,12 +1,17 @@
-import { useTranslation } from "react-i18next";
 import { HStack, IconButton, Text } from "@chakra-ui/react";
+
 import { DeleteIcon } from "@chakra-ui/icons";
+import { FC } from "react";
+import { useTranslation } from "react-i18next";
 
 interface HistoryResultatProps {
 	history: number[];
 	handlerClear: () => void;
 }
-const HistoryResultat = ({ history, handlerClear }: HistoryResultatProps) => {
+const HistoryResultat: FC<HistoryResultatProps> = ({
+	history,
+	handlerClear,
+}) => {
 	const { t } = useTranslation();
 	const numbers: number[] =
 		history.length > 4 ? [...history].reverse() : [...history].reverse();

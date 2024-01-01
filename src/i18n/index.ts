@@ -1,13 +1,10 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
+import { LANGUEAGE } from 'src/i18n/enums';
 
-export enum LANGUEAGE {
-    EN = "en",
-    UK = "uk",
-}
 const translations = {
     en: require("./translations/en.json"),
-    uk: require("./translations/uk.json"),
+    ua: require("./translations/uk.json"),
 };
 
 export const getLanguages = (t: any) => {
@@ -33,8 +30,8 @@ i18n
             en: {
                 translation: translations.en,
             },
-            uk: {
-                translation: translations.uk,
+            ua: {
+                translation: translations.ua,
             },
         },
     })

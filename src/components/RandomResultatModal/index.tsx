@@ -1,30 +1,35 @@
 import {
+	Box,
 	Modal,
-	ModalContent,
-	ModalHeader,
 	ModalBody,
 	ModalCloseButton,
-	Text,
-	Box,
+	ModalContent,
 	ModalFooter,
+	ModalHeader,
+	Text,
+	useStyleConfig,
 } from "@chakra-ui/react";
-import { useTranslation } from "react-i18next";
+
+import { FC } from "react";
 import { TypeResultat } from "src/features/randomGenerator/types";
+import { useTranslation } from "react-i18next";
+
 interface RandomResultatModalProps {
 	isOpen: boolean;
 	onClose: () => void;
 	handlerRandom: () => void;
-	listNumberRandom: (number | string)[];
+	listNumberRandom: (number | string | undefined)[];
 	typeResultat?: TypeResultat;
 }
-const RandomResultatModal = ({
+const RandomResultatModal: FC<RandomResultatModalProps> = ({
 	isOpen,
 	onClose,
 	listNumberRandom,
 	handlerRandom,
 	typeResultat,
-}: RandomResultatModalProps) => {
+}) => {
 	const { t } = useTranslation();
+	const boxStyles = useStyleConfig("Box", { variant: "button" });
 	return (
 		<Modal isCentered size='full' isOpen={isOpen} onClose={onClose}>
 			<ModalContent bgGradient='linear(to-r, purple.300, blue.300)'>
@@ -46,23 +51,7 @@ const RandomResultatModal = ({
 				</ModalBody>
 
 				<ModalFooter justifyContent='center' alignItems='center'>
-					<Box
-						onClick={handlerRandom}
-						width={["100%", "100%"]}
-						height={["50px", "60px"]}
-						fontSize={["16px", "24px"]}
-						color='white'
-						fontWeight='bold'
-						borderRadius='md'
-						bgGradient='linear(to-r, purple.500, blue.500)'
-						as='button'
-						_hover={{
-							bgGradient: "linear(to-r, blue.300, purple.300)",
-							textColor: "#gray.300",
-						}}
-						style={{
-							fontWeight: "600",
-						}}>
+					<Box onClick={handlerRandom} __css={boxStyles} as='button'>
 						{t("generateMore")}
 					</Box>
 				</ModalFooter>

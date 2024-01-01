@@ -1,5 +1,4 @@
-
-import { RandomNumberGeneratorNames } from 'src/features/randomGenerator/screens/NumberRandomGenerator';
+import { RandomNumberGeneratorNames } from 'src/features/randomGenerator/enums';
 export interface RandomGeneratorState {
     generateNumerosity: number,
     generatedResultat: number[]

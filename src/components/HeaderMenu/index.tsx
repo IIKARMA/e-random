@@ -1,19 +1,24 @@
-import { HamburgerIcon } from "@chakra-ui/icons";
 import {
-	IconButton,
-	DrawerOverlay,
-	DrawerContent,
-	DrawerCloseButton,
-	DrawerHeader,
-	DrawerBody,
-	Drawer,
-	useDisclosure,
 	Box,
+	Drawer,
+	DrawerBody,
+	DrawerCloseButton,
+	DrawerContent,
+	DrawerHeader,
+	DrawerOverlay,
+	IconButton,
+	useDisclosure,
 } from "@chakra-ui/react";
-import { useCallback } from "react";
-import { useTranslation } from "react-i18next";
+import { ReactElement, useCallback } from "react";
+
+import { HamburgerIcon } from "@chakra-ui/icons";
 import { useNavigate } from "react-router-dom";
-const HeaderMenu = () => {
+import { useTranslation } from "react-i18next";
+
+interface HeaderMenuProps {
+	children?: ReactElement;
+}
+const HeaderMenu = ({ children }: HeaderMenuProps) => {
 	const { t } = useTranslation();
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const naviagate = useNavigate();
@@ -73,6 +78,7 @@ const HeaderMenu = () => {
 							}}>
 							{t("listRandomizer")}
 						</Box>
+						{children}
 					</DrawerBody>
 				</DrawerContent>
 			</Drawer>

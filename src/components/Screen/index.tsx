@@ -1,6 +1,11 @@
+import React, { FC, ReactElement } from "react";
+
 import { Box } from "@chakra-ui/react";
-import React from "react";
-const Screen = ({ children }: any) => {
+
+interface ScreenProps {
+	children: ReactElement;
+}
+const Screen: FC<ScreenProps> = ({ children }) => {
 	return (
 		<Box
 			overflowY='hidden'

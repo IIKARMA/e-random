@@ -1,23 +1,32 @@
-import { LinkBox, Button, VStack, HStack, Image } from "@chakra-ui/react";
-import { ChangeEvent, FC } from "react";
-import { useTranslation } from "react-i18next";
+import {
+	Box,
+	HStack,
+	Image,
+	LinkBox,
+	Text,
+	VStack,
+	useStyleConfig,
+} from "@chakra-ui/react";
+
+import { FC } from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 interface RadioButtomProps {
-	onChange?: (event: ChangeEvent) => void;
 	isChecked?: boolean;
 	children?: any;
 	img?: string;
 	path?: string;
 }
 const RadioButton: FC<RadioButtomProps> = ({
-	onChange,
 	isChecked,
 	children,
 	img,
 	path,
 }) => {
 	const { t } = useTranslation();
+	const styles = useStyleConfig("Box", { variant: "buttonCard" });
+
 	return (
 		<LinkBox
 			aria-checked={isChecked}
@@ -37,18 +46,31 @@ const RadioButton: FC<RadioButtomProps> = ({
 			py={3}
 			width={[350, 350, 380]}
 			as='button'
-			onClick={() => {
-				onChange && onChange(children);
-			}}>
+			boxShadow='xl'>
 			<Link to={path ? path : ""}>
-				<HStack spacing={15}>
+				<HStack spacing={15} position='relative'>
 					<VStack spacing='70px' alignItems='flex-start'>
-						<h1>{children}</h1>
-						<Button style={{ color: "#fff", background: "#48cae4" }}>
+						<Text
+							textAlign='left'
+							width={220}
+							textColor='#fff'
+							lineHeight='32px'
+							fontSize='26px'
+							fontWeight='extrabold'>
+							{children}
+						</Text>
+						<Box as='button' __css={styles}>
 							{t("go")}
-						</Button>
+						</Box>
 					</VStack>
-					<Image src={require("src/assets/" + img)} w='120px' />
+					<Image
+						style={{ rotate: "2 .6 -32  25deg" }}
+						position='absolute'
+						top={5}
+						right={-10}
+						src={require("src/assets/" + img)}
+						w='150px'
+					/>
 				</HStack>
 			</Link>
 		</LinkBox>
