@@ -38,8 +38,7 @@ const RandomGeneratorNumber = () => {
 		onOpen: onOpenAdmin,
 		onClose: onCloseAdmin,
 	} = useDisclosure();
-	const { screenWidth } = useResizeScreen();
-	const [hiddenResultaBox, setHiddenResultaBox] = useBoolean();
+	const screenWidth = useResizeScreen();
 
 	const [needResut, setNeedResult] = useState<(string | number)[]>([""]);
 	const [rangeGeneration, setRangeGeneration] = useState({
@@ -148,11 +147,6 @@ const RandomGeneratorNumber = () => {
 		[isValid, checkValidation, handlerClearResult, randomList],
 	);
 
-	useEffect(() => {
-		if (screenWidth < 435) setHiddenResultaBox.on();
-		else setHiddenResultaBox.off();
-	}, [screenWidth, setHiddenResultaBox]);
-
 	return (
 		<Box ref={boxRef}>
 			<Heading
@@ -171,7 +165,7 @@ const RandomGeneratorNumber = () => {
 					handleInput={(e) => setNeedResult(e)}
 				/>
 				<HStack
-					alignItems={!hiddenResultaBox ? "baseline" : ""}
+					alignItems={!screenWidth ? "baseline" : ""}
 					__css={hstackStyles}>
 					<VStack alignSelf='flex-start' spacing={[5, 8]}>
 						{randomNumberGeneratorFields.map((field) => (
@@ -194,7 +188,7 @@ const RandomGeneratorNumber = () => {
 							{t("generate")}
 						</Box>
 					</VStack>
-					{!hiddenResultaBox ? (
+					{screenWidth ? (
 						renderRandom()
 					) : (
 						<RandomResultatModal

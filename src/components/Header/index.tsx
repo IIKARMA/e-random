@@ -24,7 +24,7 @@ import { useTranslation } from "react-i18next";
 export type Flag = keyof typeof FlagLanguages;
 const Header = () => {
 	const { t, i18n } = useTranslation("translation");
-	const { screenWidth } = useResizeScreen();
+	const screenWidth = useResizeScreen();
 	const onChangeLanguages = (lang: LANGUEAGE) => {
 		return i18n.changeLanguage(lang);
 	};
@@ -41,7 +41,7 @@ const Header = () => {
 			paddingRight='20px'
 			backgroundBlendMode='32'
 			h='72px'
-			mb={screenWidth > 400 ? "5rem" : "2rem"}>
+			mb={screenWidth ? "5rem" : "2rem"}>
 			<HStack
 				spacing={5}
 				justifyContent='space-between'
@@ -64,7 +64,7 @@ const Header = () => {
 					</Link>
 				</BreadcrumbItem>
 
-				{screenWidth > 450 ? (
+				{screenWidth ? (
 					<HStack>
 						<Menu>
 							<MenuButton

@@ -14,6 +14,7 @@ import { ReactElement, useCallback } from "react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { zindexs } from "src/consts/index";
 
 interface HeaderMenuProps {
 	children?: ReactElement;
@@ -51,6 +52,7 @@ const HeaderMenu = ({ children }: HeaderMenuProps) => {
 							background='#fefef04e'
 							borderRadius='1.2rem'
 							my='10px'
+							zIndex={zindexs.drawer}
 							py='5'
 							px='10px'
 							textAlign='center'

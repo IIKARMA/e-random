@@ -12,6 +12,7 @@ import {
 	useStyleConfig,
 	useToast,
 } from "@chakra-ui/react";
+import { read, utils } from "xlsx";
 import { useCallback, useEffect, useState } from "react";
 
 import AdminModal from "src/components/AdminModal";
@@ -39,17 +40,16 @@ const ListRandomGenerator = () => {
 		onOpen: onOpenAdmin,
 		onClose: onCloseAdmin,
 	} = useDisclosure();
-	const [hiddenResultaBox, setHiddenResultaBox] = useBoolean();
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const toast = useToast();
 	const [needResutat, setNeedResultat] = useState<(string | number)[]>([""]);
-
-	const [file, setFile] = useState(null);
+	const [file, setFile] = useState<File | undefined>();
 	const [fileString, setFileString] = useState("");
 	const [listResultat, setListResultat] = useState<(string | undefined)[]>([
 		"",
 	]);
-	const { screenWidth } = useResizeScreen();
+
+	const screenWidth = useResizeScreen();
 	const fileReader = new FileReader();
 	const handlerOnUpload = (e: any) => {
 		setFile(e.target?.files[0]);
@@ -69,30 +69,57 @@ const ListRandomGenerator = () => {
 	};
 	const handlerReadFile = () => {
 		if (file) {
-			fileReader.onload = function (event) {
-				const csvOutput = event.target?.result;
-
-				readString(String(csvOutput), {
-					worker: true,
-
-					complete: (results) => {
-						const string = String(
-							results.data.map((item: any) => item[0]).join("\n"),
-						);
-						isCsv(file)
-							? setFileString(string)
-							: toast({
-									title: t("isNotCSV"),
-									status: "error",
-									duration: 3000,
-									position: "top-right",
-									isClosable: true,
-							  });
-					},
-				});
-			};
-			fileReader.readAsText(file);
+			const formaFile = String(String(file.name).match(/\.\w{0,3}/g)?.[0]);
+			if (formaFile.includes(".csv")) handleCsvFile(file);
+			else if (formaFile.includes(".xls")) handleXlsFile(file);
+			return fileReader.readAsText(file);
 		}
+	};
+	const handleXlsFile = (file: File) => {
+		const reader = new FileReader();
+		const rABS = !!reader.readAsBinaryString;
+		reader.onload = (event) => {
+			/* Parsevevent data */
+			const bstr = event.target?.result;
+			const wb = read(bstr, { type: "binary" });
+			/* Get first worksheet */
+			const wsname = wb.SheetNames[0];
+			const ws = wb.Sheets[wsname];
+			console.log(rABS, wb);
+			/* Convert array of arrays */
+			const data = utils.sheet_to_json(ws, { header: 1 });
+			const string = String(data.map((item: any) => item).join("\n"));
+			/* Update state */
+			console.log(wsname, string, data);
+
+			setFileString(string);
+		};
+		if (rABS) reader.readAsBinaryString(file);
+		else reader.readAsArrayBuffer(file);
+	};
+	const handleCsvFile = (file: File) => {
+		fileReader.onload = function (event) {
+			const csvOutput = event.target?.result;
+
+			readString(String(csvOutput), {
+				worker: true,
+
+				complete: (results) => {
+					const string = String(
+						results.data.map((item: any) => item[0]).join("\n"),
+					);
+					isCsv(file)
+						? setFileString(string)
+						: toast({
+								title: t("isNotCSV"),
+								status: "error",
+								duration: 3000,
+								position: "top-right",
+								isClosable: true,
+						  });
+				},
+			});
+		};
 	};
 	const handlerOnSubmit = () => {
 		const rendomNumber: number = onRandomNumber(
@@ -123,10 +150,6 @@ const ListRandomGenerator = () => {
 		fileString.includes("1111") && Boolean(isAdmin());
 	}, [fileString, isAdmin, onOpenAdmin]);
 
-	useEffect(() => {
-		if (screenWidth < 435) setHiddenResultaBox.on();
-		else setHiddenResultaBox.off();
-	}, [screenWidth, setHiddenResultaBox]);
 	return (
 		<Box>
 			<Heading
@@ -145,12 +168,10 @@ const ListRandomGenerator = () => {
 					handleInput={(e) => setNeedResultat(e)}
 				/>
 				<HStack
-					alignItems={!hiddenResultaBox ? "baseline" : ""}
+					alignItems={!screenWidth ? "baseline" : ""}
 					__css={hstackStyles}>
-					<VStack alignSelf='flex-start' spacing={hiddenResultaBox ? 3 : 5}>
-						<VStack
-							spacing={hiddenResultaBox ? 3 : 5}
-							width={["100%", 400, 500]}>
+					<VStack alignSelf='flex-start' spacing={screenWidth ? 3 : 5}>
+						<VStack spacing={screenWidth ? 3 : 5} width={["100%", 400, 500]}>
 							<Box
 								color='purple.500,'
 								alignItems='flex-start'
@@ -192,13 +213,13 @@ const ListRandomGenerator = () => {
 						<></>
 						<Box
 							onClick={handlerOnSubmit}
-							mb={hiddenResultaBox ? 0 : 5}
+							mb={screenWidth ? 0 : 5}
 							__css={styles}
 							as='button'>
 							{t("generate")}
 						</Box>
 					</VStack>
-					{!hiddenResultaBox ? (
+					{screenWidth ? (
 						<RandomResultat
 							typeResultat={TypeResultat.STRING}
 							startRandom={false}

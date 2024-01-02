@@ -8,6 +8,7 @@ import Header from "src/components/Header";
 import { I18nextProvider } from "react-i18next";
 import LaunchScreen from "./features/launch/screens";
 import ListRandomGenerator from "src/features/randomGenerator/screens/ListRandomGenerator";
+import Loyaot from "src/components/Loyaot";
 import RadioButton from "src/components/RadioButton";
 import RandomGeneratorNumber from "src/features/randomGenerator/screens/NumberRandomGenerator";
 import Screen from "src/components/Screen";
@@ -24,17 +25,15 @@ function App() {
 			<ChakraProvider
 				theme={theme}
 				toastOptions={{ defaultOptions: { position: "bottom" } }}>
-				<Screen>
-					<>
-						<Header />
 						<Routes>
-							<Route path='/' element={<LaunchScreen />} />
-							<Route path='app' element={<RadioButton />} />
-							<Route path='number' element={<RandomGeneratorNumber />} />
-							<Route path='list' element={<ListRandomGenerator />} />
+							<Route path="/" element={<Loyaot/>}>
+								<Route index path='/' element={<LaunchScreen />} />
+								<Route path='app' element={<RadioButton />} />
+								<Route path='number' element={<RandomGeneratorNumber />} />
+								<Route path='list' element={<ListRandomGenerator />} />
+								<Route path='*' element={<LaunchScreen />} />
+							</Route>
 						</Routes>
-					</>
-				</Screen>
 			</ChakraProvider>
 		</I18nextProvider>
 	);

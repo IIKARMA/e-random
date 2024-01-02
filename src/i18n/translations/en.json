@@ -22,8 +22,8 @@
     "placeholderListRandom": "Add one participant in each row...",
     "isNotCSV": "Invalid file format",
     "description": {
-        "header": "Free to choose the winner from the list, CSV database.",
-        "body": "Choose a winner from a list, CSV database for free.\n For all organizers of sweepstakes and contests, Gift Random has created the best free online randomizer for choosing a winner from a list, CSV database, which guarantees honesty, openness and ease of determining winners."
+        "header": "Free to choose the winner from the list, Excel, CSV database.",
+        "body": "Choose a winner from a list, CSV database for free.\n For all organizers of sweepstakes and contests, Gift Random has created the best free online randomizer for choosing a winner from a list, Excel, CSV database, which guarantees honesty, openness and ease of determining winners."
     },
     "descriptionNumberRandom": {
         "header": "In order to ensure the fairness of contests and prize draws, Gift Random has developed its own as honest and free online randomizer (random number generator) as possible to determine the winner.",

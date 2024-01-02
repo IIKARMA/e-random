@@ -3,10 +3,11 @@ export const HStack = defineStyleConfig({
     variants: {
         conteiner: {
             boxShadow: 'xl',
-            w: ["90%", "50%", "50%"],
+            w: ["90%", "80%", "50%"],
             spacing: 10,
             borderRadius: '1.2rem',
             alignSelf: 'center',
+            flexWrap: 'wrap',
             display: 'flex',
             pt: ['10', '20'],
             p: '2rem',

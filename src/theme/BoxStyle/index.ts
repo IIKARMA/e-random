@@ -19,7 +19,7 @@ export const Box = defineStyleConfig({
         },
         buttonCard: {
             color: 'white',
-            fontWeight: 'bold', zIndex: 3233,
+            fontWeight: 'bold',
             borderRadius: 'md',
             alignSelf: 'center',
             bgGradient: 'linear(to-r, purple.600, blue.300)',

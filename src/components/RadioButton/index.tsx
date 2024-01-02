@@ -11,6 +11,7 @@ import {
 import { FC } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { zindexs } from "src/consts/index";
 
 interface RadioButtomProps {
 	isChecked?: boolean;
@@ -64,6 +65,7 @@ const RadioButton: FC<RadioButtomProps> = ({
 						</Box>
 					</VStack>
 					<Image
+						zIndex={zindexs.button}
 						style={{ rotate: "2 .6 -32  25deg" }}
 						position='absolute'
 						top={5}
